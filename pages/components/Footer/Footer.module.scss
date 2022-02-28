@@ -1,0 +1,35 @@
+.center_flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  @extend .center_flex;
+  gap: 2vw;
+
+  & > p {
+    font-size: 16pt;
+    font-weight: 500;
+  }
+
+  .themeContainer {
+    @extend .center_flex;
+    gap: 10px;
+
+    span {
+      @extend .center_flex;
+      height: 6vh;
+      padding-left: 20px;
+      padding-right: 20px;
+      border: 1px solid black;
+      cursor: pointer;
+      transition: all 200ms ease-in-out;
+
+      &:hover {
+        background-color: #000;
+        color: white;
+      }
+    }
+  }
+}

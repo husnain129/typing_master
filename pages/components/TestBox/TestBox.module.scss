@@ -1,0 +1,62 @@
+.flex_center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin themable($theme-name, $box-color, $text-color, $btn-color) {
+  .#{$theme-name} {
+    width: 47vw;
+    height: auto;
+    padding: 3vh 2vw;
+    background: $box-color;
+    color: $text-color;
+    @extend .flex_center;
+    flex-direction: column;
+    gap: 4vh;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba($color: #000, $alpha: 0.2);
+
+    .paragraph {
+      @extend .flex_center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 5px;
+
+      p {
+        font-size: 13pt;
+      }
+    }
+
+    .testAns {
+      @extend .flex_center;
+      justify-content: space-between;
+      width: 100%;
+
+      input {
+        width: 86%;
+        height: 6vh;
+        padding-left: 8px;
+        outline: none;
+        border: none;
+        font-size: 13pt;
+      }
+
+      p {
+        @extend .flex_center;
+        width: 12%;
+        height: 6vh;
+        background: $btn-color;
+        color: $text-color;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 14pt;
+      }
+    }
+  }
+}
+
+@include themable(default, #eaeaea, #000, #d4d4d4);
+@include themable(monokai, #272822, #fff, #f92672);
+@include themable(nord, #2e3440, #eceff4, #3b4252);

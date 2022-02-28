@@ -1,0 +1,35 @@
+@mixin themable($theme-name, $bg-color, $text-color) {
+  .#{$theme-name} {
+    width: 100vw;
+    height: 100vh;
+    background: $bg-color;
+    color: $text-color;
+  }
+}
+
+.center_flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  height: inherit;
+  width: inherit;
+  @extend .center_flex;
+  flex-direction: column;
+  flex: 1;
+
+  .testBox {
+    @extend .center_flex;
+    height: 90vh;
+  }
+  .footer {
+    @extend .center_flex;
+    height: 10vh;
+  }
+}
+
+@include themable(default, #fafafa, #000);
+@include themable(monokai, #171812, #a6e22e);
+@include themable(nord, #242933, #eceff4);
