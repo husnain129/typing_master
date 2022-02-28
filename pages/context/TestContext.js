@@ -15,11 +15,18 @@ const TestProvider = ({ children }) => {
     });
 
   let [data, setData] = useState(dataVal);
-  const handleWrongEntry = (idx) => {
-    data[idx]["color"] = "red";
+  const handleEntryColor = (idx, color) => {
+    data[idx]["color"] = color;
   };
+
+  const resetData = () => {
+    data.map((e) => {
+      e["color"] = e["color"] !== "" && "";
+    });
+  };
+
   return (
-    <TestContext.Provider value={{ data, handleWrongEntry }}>
+    <TestContext.Provider value={{ data, handleEntryColor, resetData }}>
       {children}
     </TestContext.Provider>
   );

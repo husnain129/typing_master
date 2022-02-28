@@ -3,8 +3,16 @@
   align-items: center;
   justify-content: center;
 }
+.testHeader {
+  @extend .flex_center;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 16pt;
+}
 
-@mixin themable($theme-name, $box-color, $text-color, $btn-color) {
+@mixin themable($theme-name, $box-color, $text-color, $btn-color, $nextWord) {
   .#{$theme-name} {
     width: 47vw;
     height: auto;
@@ -27,6 +35,9 @@
       p {
         font-size: 13pt;
       }
+      .nextWord {
+        color: $nextWord;
+      }
     }
 
     .testAns {
@@ -38,9 +49,11 @@
         width: 86%;
         height: 6vh;
         padding-left: 8px;
-        outline: none;
+        outline-color: #a56de2;
+        border-color: none;
         border: none;
         font-size: 13pt;
+        border-radius: 2px;
       }
 
       p {
@@ -57,6 +70,6 @@
   }
 }
 
-@include themable(default, #eaeaea, #000, #d4d4d4);
-@include themable(monokai, #272822, #fff, #f92672);
-@include themable(nord, #2e3440, #eceff4, #3b4252);
+@include themable(default, #eaeaea, #000, #d4d4d4, #a56de2);
+@include themable(monokai, #272822, #fff, #f92672, #66d9ef);
+@include themable(nord, #2e3440, #eceff4, #3b4252, #a56de2);
