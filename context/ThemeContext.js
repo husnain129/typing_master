@@ -5,9 +5,12 @@ const ThemeContext = createContext();
 const ThemeProvider = ({ children }) => {
   let [selectedTheme, setSelectedTheme] = useState("default");
   useEffect(() => {
-    if (localStorage.getItem("selectTheme") !== undefined) {
+    if (localStorage.getItem("selectTheme") !== null) {
+      console.log(
+        'localStorage.getItem("selectTheme")',
+        localStorage.getItem("selectTheme")
+      );
       setSelectedTheme(localStorage.getItem("selectTheme"));
-      console.log(localStorage.getItem("selectTheme"));
     }
   }, []);
   return (
