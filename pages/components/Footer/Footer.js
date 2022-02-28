@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "../../context/ThemeContext";
+import { ThemeContext } from "../../../context/ThemeContext";
 import s from "./Footer.module.scss";
 const Footer = () => {
   const { theme, setSelectedTheme } = useContext(ThemeContext);

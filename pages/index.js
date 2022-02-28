@@ -1,8 +1,8 @@
 import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 import s from "../styles/Home.module.scss";
 import Footer from "./components/Footer/Footer";
 import TestBox from "./components/TestBox/TestBox";
-import { ThemeContext } from "./context/ThemeContext";
 export default function Home() {
   const { selectedTheme, setSelectedTheme } = useContext(ThemeContext);
 

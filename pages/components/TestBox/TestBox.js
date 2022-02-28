@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from "react";
-import { TestContext } from "../../context/TestContext";
-import { ThemeContext } from "../../context/ThemeContext";
+import { TestContext } from "../../../context/TestContext";
+import { ThemeContext } from "../../../context/ThemeContext";
 import s from "./TestBox.module.scss";
 
 const TestBox = () => {

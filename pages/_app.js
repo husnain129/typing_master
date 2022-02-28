@@ -1,6 +1,6 @@
+import { TestProvider } from "../context/TestContext";
+import { ThemeProvider } from "../context/ThemeContext";
 import "../styles/globals.css";
-import { TestProvider } from "./context/TestContext";
-import { ThemeProvider } from "./context/ThemeContext";
 
 function MyApp({ Component, pageProps }) {
   return (
