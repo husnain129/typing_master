@@ -4,7 +4,8 @@ import Footer from "./components/Footer/Footer";
 import TestBox from "./components/TestBox/TestBox";
 import { ThemeContext } from "./context/ThemeContext";
 export default function Home() {
-  const { selectedTheme } = useContext(ThemeContext);
+  const { selectedTheme, setSelectedTheme } = useContext(ThemeContext);
+
   return (
     <div className={s[selectedTheme]}>
       <div className={s.container}>

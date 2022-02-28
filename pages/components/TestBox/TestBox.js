@@ -1,20 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { TestContext } from "../../context/TestContext";
 import { ThemeContext } from "../../context/ThemeContext";
 import s from "./TestBox.module.scss";
+
 const TestBox = () => {
   const { data } = useContext(TestContext);
   const { selectedTheme } = useContext(ThemeContext);
   let [idx, setIdx] = useState(0);
-  let [time, setTime] = useState(60);
-
-  useEffect(() => {
-    if (time > 0) {
-      setTimeout(() => {
-        setTime(parseInt(time) - 1);
-      }, 1000);
-    }
-  }, [time]);
+  let [time, setTime] = useState(30);
+  let intervalRef = useRef(null);
 
   return (
     <div>
@@ -25,7 +19,6 @@ const TestBox = () => {
       <div className={s[selectedTheme]}>
         <div className={s.paragraph}>
           {data.map((word, i) => {
-            const clr = i === idx ? "blue" : "";
             return (
               <p
                 key={i}
@@ -43,16 +36,32 @@ const TestBox = () => {
           idx={idx}
           setIdx={setIdx}
           time={time}
+          intervalRef={intervalRef}
         />
       </div>
     </div>
   );
 };
 
-const InputHandler = ({ data, idx, setIdx, setTime, time }) => {
+const InputHandler = ({ data, idx, setIdx, setTime, time, intervalRef }) => {
   const { handleEntryColor, resetData } = useContext(TestContext);
   let [textEnter, setTextEnter] = useState("");
+
   const handleSpace = (e) => {
+    if (intervalRef.current === null) {
+      intervalRef.current = setInterval(() => {
+        setTime((time) => {
+          if (time === 0) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+
+            return 0;
+          }
+          return time - 1;
+        });
+      }, 1000);
+    }
+
     if (e.keyCode === 32) {
       if (String(textEnter).trim() !== String(data[idx][idx])) {
         handleEntryColor(idx, "red");
@@ -63,12 +72,16 @@ const InputHandler = ({ data, idx, setIdx, setTime, time }) => {
       setIdx(parseInt(idx) + 1);
     }
   };
+
   function handleReset() {
     setTextEnter("");
-    setIdx(0);
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
     resetData();
-    setTime(60);
+    setTime(30);
+    setIdx(0);
   }
+
   return (
     <div className={s.testAns}>
       {time !== 0 ? (
@@ -79,13 +92,7 @@ const InputHandler = ({ data, idx, setIdx, setTime, time }) => {
           onChange={(e) => setTextEnter(e.target.value)}
         />
       ) : (
-        <input
-          type="text"
-          value={textEnter}
-          onKeyDown={handleSpace}
-          disabled
-          onChange={(e) => setTextEnter(e.target.value)}
-        />
+        <input type="text" value="" onKeyDown={handleSpace} disabled />
       )}
       <p onClick={handleReset}>redo</p>
     </div>
