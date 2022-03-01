@@ -11,7 +11,7 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    height: "30vh",
+    height: "50vh",
     width: "40vw",
   },
 };
@@ -23,6 +23,7 @@ const ModalBox = () => {
   const { setUser } = useContext(UserContext);
 
   let [regNo, setRegNo] = useState("");
+  let [name, setName] = useState("");
   let [error, setError] = useState("valid");
 
   useEffect(() => {
@@ -53,7 +54,13 @@ const ModalBox = () => {
           <div className={s.inputContainer}>
             <input
               type="text"
-              placeholder="SP19-BCS-092"
+              placeholder="Enter Name..."
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Reg No - SP19-BCS-092"
               value={regNo}
               onChange={(e) => setRegNo(e.target.value)}
             />

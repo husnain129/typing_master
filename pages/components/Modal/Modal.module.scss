@@ -19,8 +19,9 @@
     @extend .flex_center;
     margin-top: 10px;
     height: 70%;
+    flex-direction: column;
     width: inherit;
-    gap: 8px;
+    gap: 3vh;
     input {
       width: 50%;
       height: 35px;

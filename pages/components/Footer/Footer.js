@@ -14,7 +14,6 @@ const Footer = () => {
             onClick={() => {
               localStorage.setItem("selectTheme", e);
               setSelectedTheme(e);
-              console.log("themen askjdh", e);
             }}
           >
             {e}

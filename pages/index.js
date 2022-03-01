@@ -17,7 +17,6 @@ export default function Home() {
     typeof localStorage !== "undefined" && localStorage.getItem("test") !== null
   );
 
-  console.log(test);
   useEffect(() => {
     if (user) {
       setIsRegNo(true);
