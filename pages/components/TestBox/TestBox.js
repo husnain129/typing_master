@@ -10,7 +10,7 @@ const TestBox = () => {
   const { selectedTheme } = useContext(ThemeContext);
   const { name, regNo } = useContext(UserContext);
   let [idx, setIdx] = useState(0);
-  let [time, setTime] = useState(30);
+  let [time, setTime] = useState(10);
   let intervalRef = useRef(null);
   let [total, setTotal] = useState(0);
 
@@ -106,7 +106,7 @@ const InputHandler = ({ data, idx, setIdx, setTime, time, intervalRef }) => {
     clearInterval(intervalRef.current);
     intervalRef.current = null;
     resetData();
-    setTime(30);
+    setTime(10);
     setIdx(0);
   }
 

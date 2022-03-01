@@ -1,12 +1,22 @@
+import { collection, onSnapshot, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { getReport } from "../../utils/getReport";
+import { db } from "../../utils/firebase";
 import s from "./admin.module.scss";
+
 const Admin = () => {
   const [report, setReport] = useState([]);
   useEffect(() => {
     (async () => {
-      // await addReport();
-      const report = await getReport();
+      // const report = await getReport();
+
+      const studentCollection = query(collection(db, "students"));
+      onSnapshot(studentCollection, (querySnapshot) => {
+        const repo = [];
+        querySnapshot.forEach((doc) => {
+          repo.push({ ...doc.data() });
+        });
+        setReport(repo);
+      });
       setReport(report);
     })();
   }, []);

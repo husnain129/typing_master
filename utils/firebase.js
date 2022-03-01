@@ -22,4 +22,4 @@ const db = getFirestore(app);
 
 // Get a reference to the database service
 
-export { db };
+export { db, app };
