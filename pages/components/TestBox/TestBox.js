@@ -15,7 +15,6 @@ const TestBox = () => {
     if(idx-1 >= 0){
       setTotal(total+data[idx-1][idx-1].length)
     }
-
   }, [idx,setIdx]);
 
 
