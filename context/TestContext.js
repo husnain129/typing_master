@@ -15,6 +15,7 @@ const TestProvider = ({ children }) => {
     });
 
   let [data, setData] = useState(dataVal);
+  let [speed, setSpeed] = useState(0);
 
   const handleEntryColor = (idx, color) => {
     data[idx]["color"] = color;
@@ -26,19 +27,11 @@ const TestProvider = ({ children }) => {
     });
   };
 
-  const checkTest = (idx) => {
-    console.log("idx = ", idx);
-    let total = 0;
-    for (let i = 0; i <= idx; idx++) {
-      total += data[i][i];
-    }
-    console.log("total - ", total);
-    console.log("total time - ", total / 0.5);
-  };
+ 
 
   return (
     <TestContext.Provider
-      value={{ data, handleEntryColor, resetData, checkTest }}
+      value={{ data, handleEntryColor, resetData, speed, setSpeed }}
     >
       {children}
     </TestContext.Provider>

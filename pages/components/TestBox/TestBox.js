@@ -1,19 +1,34 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { TestContext } from "../../../context/TestContext";
 import { ThemeContext } from "../../../context/ThemeContext";
 import s from "./TestBox.module.scss";
 
 const TestBox = () => {
-  const { data } = useContext(TestContext);
+  const { data, speed, setSpeed } = useContext(TestContext);
   const { selectedTheme } = useContext(ThemeContext);
   let [idx, setIdx] = useState(0);
   let [time, setTime] = useState(30);
   let intervalRef = useRef(null);
+  let [total,setTotal] = useState(0);
+
+  useEffect(() => {
+    if(idx-1 >= 0){
+      setTotal(total+data[idx-1][idx-1].length)
+    }
+
+  }, [idx,setIdx]);
+
+
+  useEffect(()=>{
+    if(time === 0){
+      setSpeed(Math.floor(parseInt(total/(5*.5))))
+    }
+  },[time])
 
   return (
     <div>
       <div className={s.testHeader}>
-        <p style={{ marginBottom: "10px" }}>WPM: XX / ACC: XX</p>
+        <p style={{ marginBottom: "10px" }}>WPM: {speed !== 0 ? speed: 'XX'} / ACC: XX</p>
         <p>{time}</p>
       </div>
       <div className={s[selectedTheme]}>
