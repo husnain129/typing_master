@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { TestContext } from "../../../context/TestContext";
 import { ThemeContext } from "../../../context/ThemeContext";
+import { UserContext } from "../../../context/UserContext";
+import { addReport } from "../../../utils/getReport";
 import s from "./TestBox.module.scss";
 
 const TestBox = () => {
   const { data, speed, setSpeed } = useContext(TestContext);
   const { selectedTheme } = useContext(ThemeContext);
+  const { name, regNo } = useContext(UserContext);
   let [idx, setIdx] = useState(0);
   let [time, setTime] = useState(30);
   let intervalRef = useRef(null);
@@ -19,8 +22,17 @@ const TestBox = () => {
 
   useEffect(() => {
     if (time === 0) {
+      let testSpeed = Math.floor(parseInt(total / (5 * 0.5)));
       localStorage.setItem("test", true);
-      setSpeed(Math.floor(parseInt(total / (5 * 0.5))));
+      setSpeed(testSpeed);
+      const reportData = {
+        name: name,
+        registration: regNo,
+        speed: testSpeed,
+      };
+      (async () => {
+        await addReport(reportData);
+      })();
     }
   }, [time]);
 

@@ -20,10 +20,8 @@ Modal.setAppElement("#__next");
 
 const ModalBox = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const { setUser } = useContext(UserContext);
+  const { setUser, regNo, setRegNo, name, setName } = useContext(UserContext);
 
-  let [regNo, setRegNo] = useState("");
-  let [name, setName] = useState("");
   let [error, setError] = useState("valid");
 
   useEffect(() => {
