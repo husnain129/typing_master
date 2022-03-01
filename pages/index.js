@@ -13,6 +13,11 @@ export default function Home() {
       localStorage.getItem("reg_no") !== null
   );
 
+  const [test, setTest] = useState(
+    typeof localStorage !== "undefined" && localStorage.getItem("test") !== null
+  );
+
+  console.log(test);
   useEffect(() => {
     if (user) {
       setIsRegNo(true);
@@ -22,7 +27,9 @@ export default function Home() {
   return (
     <div className={s[selectedTheme]}>
       <div className={s.container}>
-        <div className={s.testBox}>{isRegNo ? <TestBox /> : <ModalBox />}</div>
+        <div className={s.testBox}>
+          {!test ? isRegNo ? <TestBox /> : <ModalBox /> : "Already done Test"}
+        </div>
         <div className={s.footer}>
           <Footer />
         </div>
