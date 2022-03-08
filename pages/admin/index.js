@@ -1,4 +1,10 @@
-import { collection, onSnapshot, query } from "firebase/firestore";
+import {
+  collection,
+  limit,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../../utils/firebase";
 import s from "./admin.module.scss";
@@ -9,7 +15,11 @@ const Admin = () => {
     (async () => {
       // const report = await getReport();
 
-      const studentCollection = query(collection(db, "students"));
+      const studentCollection = query(
+        collection(db, "students"),
+        orderBy("TypingSpeed", "desc"),
+        limit(3)
+      );
       onSnapshot(studentCollection, (querySnapshot) => {
         const repo = [];
         querySnapshot.forEach((doc) => {
