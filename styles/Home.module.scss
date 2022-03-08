@@ -14,11 +14,13 @@
 }
 
 .container {
+  @extend .center_flex;
   height: inherit;
   width: inherit;
-  @extend .center_flex;
   flex-direction: column;
   flex: 1;
+
+  // THERE IS NO BACKGROUND PROPERTY IN CONTAINER CLASS
 
   .testBox {
     @extend .center_flex;

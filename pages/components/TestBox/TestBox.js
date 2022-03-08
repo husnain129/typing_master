@@ -74,6 +74,7 @@ const TestBox = () => {
 const InputHandler = ({ data, idx, setIdx, setTime, time, intervalRef }) => {
   const { handleEntryColor, resetData } = useContext(TestContext);
   let [textEnter, setTextEnter] = useState("");
+  let [errorInput, setErrorInput] = useState("");
 
   const handleSpace = (e) => {
     if (intervalRef.current === null) {
@@ -101,6 +102,23 @@ const InputHandler = ({ data, idx, setIdx, setTime, time, intervalRef }) => {
     }
   };
 
+  const handleInput = (e) => {
+    setTextEnter(e.target.value);
+    console.log(
+      "String(data[idx][idx]).includes(textEnter.trim()) - ",
+      String(data[idx][idx]).trim(),
+      e.target.value,
+      String(data[idx][idx]).trim().includes(String(e.target.value).trim())
+    );
+    if (
+      !String(data[idx][idx]).trim().includes(String(e.target.value).trim())
+    ) {
+      setErrorInput("#a19d9d");
+    } else {
+      setErrorInput("#fff");
+    }
+  };
+
   function handleReset() {
     setTextEnter("");
     clearInterval(intervalRef.current);
@@ -117,7 +135,8 @@ const InputHandler = ({ data, idx, setIdx, setTime, time, intervalRef }) => {
           type="text"
           value={textEnter}
           onKeyDown={handleSpace}
-          onChange={(e) => setTextEnter(e.target.value)}
+          onChange={handleInput}
+          style={{ background: errorInput }}
         />
       ) : (
         <input type="text" value="" onKeyDown={handleSpace} disabled />
