@@ -10,7 +10,7 @@ const TestBox = () => {
   const { selectedTheme } = useContext(ThemeContext);
   const { name, regNo } = useContext(UserContext);
   let [idx, setIdx] = useState(0);
-  let [time, setTime] = useState(30);
+  let [time, setTime] = useState(60);
   let intervalRef = useRef(null);
   let [total, setTotal] = useState(0);
 
@@ -104,14 +104,12 @@ const InputHandler = ({ data, idx, setIdx, setTime, time, intervalRef }) => {
 
   const handleInput = (e) => {
     setTextEnter(e.target.value);
-    console.log(
-      "String(data[idx][idx]).includes(textEnter.trim()) - ",
-      String(data[idx][idx]).trim(),
-      e.target.value,
-      String(data[idx][idx]).trim().includes(String(e.target.value).trim())
-    );
+
     if (
-      !String(data[idx][idx]).trim().includes(String(e.target.value).trim())
+      !compareCharacter(
+        e.target.value.trim().at(-1),
+        data[idx][idx].trim()[e.target.value.trim().length - 1]
+      )
     ) {
       setErrorInput("#a19d9d");
     } else {
@@ -119,12 +117,19 @@ const InputHandler = ({ data, idx, setIdx, setTime, time, intervalRef }) => {
     }
   };
 
+  function compareCharacter(a, b) {
+    if (a === b) {
+      return true;
+    }
+    return false;
+  }
+
   function handleReset() {
     setTextEnter("");
     clearInterval(intervalRef.current);
     intervalRef.current = null;
     resetData();
-    setTime(30);
+    setTime(60);
     setIdx(0);
   }
 
